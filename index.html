@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 800px;
+    }
+
+    .leaflet-popup-content img {
+      max-width: 200px;
+      max-height: 200px;
+    }
+    .leaflet-popup-content {
+  width: 200px;
+  height: 200px;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([48.6192, 21.7133], 10);
+
+    // Add the map tile layer (you can use your preferred tile provider)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+
+    // Define the villages with their coordinates and images
+    var TV = [
+      {
+        name: 'Bačka',
+        coordinates: [48.4408,22.0516],
+        image: 'TV/backa.jpg'
+      },
+      {
+        name: 'Bačkov',
+        coordinates: [48.7385, 21.6235],
+        image: 'TV/backov.jpg'
+      },
+      {
+        name: 'Bara',
+        coordinates: [48.4235, 21.7172],
+        image: 'TV/bara.jpg'
+      },
+      {
+        name: 'Biel',
+        coordinates: [48.4082, 22.0556],
+        image: 'TV/biel.jpg'
+      },
+      {
+        name: 'Boľ',
+        coordinates: [48.4722, 21.9414],
+        image: 'TV/bol.jpg'
+      },
+      {
+        name: 'Borša',
+        coordinates: [48.3925, 21.7066],
+        image: 'TV/borsa.jpg'
+      },
+      {
+        name: 'Boťany',
+        coordinates: [48.4436, 22.0901],
+        image: 'TV/botany.jpg'
+      },
+      {
+        name: 'Brehov',
+        coordinates: [48.485, 21.8188],
+        image: 'TV/brehov.jpg'
+      },
+      {
+        name: 'Brezina',
+        coordinates: [48.5478, 21.5552],
+        image: 'TV/brezina.jpg'
+      },
+      {
+        name: 'Byšta',
+        coordinates: [48.5273, 21.5442],
+        image: 'TV/bysta.jpg'
+      },
+      {
+        name: 'Cejkov',
+        coordinates: [48.4656, 21.7639],
+        image: 'TV/cejkov.jpg'
+      },
+      {
+        name: 'Čeľovce',
+        coordinates: [48.5995, 21.6283],
+        image: 'TV/celovce.jpg'
+      },
+      {
+        name: 'Čerhov',
+        coordinates: [48.4611, 21.6462],
+        image: 'TV/cerhov.jpg'
+      },
+      {
+        name: 'Černochov',
+        coordinates: [48.4376, 21.7327],
+        image: 'TV/cernochov.jpg'
+      },
+      {
+        name: 'Čierna',
+        coordinates: [48.4281, 22.1096],
+        image: 'TV/cierna.jpg'
+      },
+      {
+        name: 'Čierna nad Tisou',
+        coordinates: [48.4167, 22.0887],
+        image: 'TV/ciernanadtisou.jpg'
+      },
+      {
+        name: 'Dargov',
+        coordinates: [48.7297, 21.5874],
+        image: 'TV/dargov.jpg'
+      },
+      {
+        name: 'Dobrá',
+        coordinates: [48.4109, 22.0279],
+        image: 'TV/dobra.jpg'
+      },
+      {
+        name: 'Dvorianky',
+        coordinates: [48.729, 21.7066],
+        image: 'TV/dvorianky.jpg'
+      },
+      {
+        name: 'Egreš',
+        coordinates: [48.6125, 21.6087],
+        image: 'TV/egres.jpg'
+      },
+      {
+        name: 'Hraň',
+        coordinates: [48.5432, 21.7866],
+        image: 'TV/hran.jpg'
+      },
+      {
+        name: 'Hrčeľ',
+        coordinates: [48.5205, 21.6904],
+        image: 'TV/hrcel.jpg'
+      },
+      {
+        name: 'Hriadky',
+        coordinates: [48.6978, 21.7076],
+        image: 'TV/hriadky.jpg'
+      },
+      {
+        name: 'Kašov',
+        coordinates: [48.4893, 21.7416],
+        image: 'TV/kasov.jpg'
+      },
+      {
+        name: 'Kazimír',
+        coordinates: [48.5243, 21.5844],
+        image: 'TV/kazimir.jpg'
+      },
+      {
+        name: 'Klin nad Bodrogom',
+        coordinates: [48.3816, 21.7291],
+        image: 'TV/klinnadbodrogom.jpg'
+      },
+      {
+        name: 'Kožuchov',
+        coordinates: [48.5639, 21.7241],
+        image: 'TV/kozuchov.jpg'
+      },
+      {
+        name: 'Kráľovský Chlmec',
+        coordinates: [48.4201, 21.9795],
+        image: 'TV/kralovskychlmec.jpg'
+      },
+      {
+        name: 'Kravany',
+        coordinates: [48.7582, 21.6417],
+        image: 'TV/kravany.jpg'
+      },
+      {
+        name: 'Kuzmice',
+        coordinates: [48.5777, 21.5686],
+        image: 'TV/kuzmice.jpg'
+      },
+      {
+        name: 'Kysta',
+        coordinates: [48.5121, 21.7183],
+        image: 'TV/kysta.jpg'
+      },
+      {
+        name: 'Ladmovce',
+        coordinates: [48.4119, 21.7797],
+        image: 'TV/ladmovce.jpg'
+      },
+      {
+        name: 'Lastovce',
+        coordinates: [48.5364, 21.6256],
+        image: 'TV/lastovce.jpg'
+      },
+      {
+        name: 'Leles',
+        coordinates: [48.4643, 22.029],
+        image: 'TV/leles.jpg'
+      },
+      {
+        name: 'Luhyňa',
+        coordinates: [48.4882, 21.6365],
+        image: 'TV/luhyna.jpg'
+      },
+      {
+        name: 'Malá Tŕňa',
+        coordinates: [48.4531, 21.6801],
+        image: 'TV/malatrna.jpg'
+      },
+      {
+        name: 'Malé Ozorovce',
+        coordinates: [48.6812, 21.6135],
+        image: 'TV/maleozorovce.jpg'
+      },
+      {
+        name: 'Malé Trakany',
+        coordinates: [48.3978, 22.1041],
+        image: 'TV/maletrakany.jpg'
+      },
+      {
+        name: 'Malý Horeš',
+        coordinates: [48.3964, 21.9503],
+        image: 'TV/malyhores.jpg'
+      },
+      {
+        name: 'Malý Kamenec',
+        coordinates: [48.3496, 21.7855],
+        image: 'TV/malykamenec.jpg'
+      },
+      {
+        name: 'Michaľany',
+        coordinates: [48.513, 21.6221],
+        image: 'TV/michalany.jpg'
+      },
+      {
+        name: 'Nižný Žipov',
+        coordinates: [48.5793, 21.6376],
+        image: 'TV/niznyzipov.jpg'
+      },
+      {
+        name: 'Novosad',
+        coordinates: [48.5234, 21.7406],
+        image: 'TV/novosad.jpg'
+      },
+      {
+        name: 'Nový Ruskov',
+        coordinates: [48.6458, 21.6798],
+        image: 'TV/novyruskov.jpg'
+      },
+      {
+        name: 'Parchovany',
+        coordinates: [48.7478, 21.7124],
+        image: 'TV/parchovany.jpg'
+      },
+      {
+        name: 'Plechotice',
+        coordinates: [48.6232, 21.6355],
+        image: 'TV/plechotice.jpg'
+      },
+      {
+        name: 'Poľany',
+        coordinates: [48.4672, 21.9939],
+        image: 'TV/polany.jpg'
+      },
+      {
+        name: 'Pribeník',
+        coordinates: [48.3918, 21.9977],
+        image: 'TV/pribenik.jpg'
+      },
+      {
+        name: 'Rad',
+        coordinates: [48.4611, 21.8573],
+        image: 'TV/rad.jpg'
+      },
+      {
+        name: 'Sečovce',
+        coordinates: [48.6989, 21.6537],
+        image: 'TV/secovce.jpg'
+      },
+      {
+        name: 'Sirník',
+        coordinates: [48.5196, 21.802],
+        image: 'TV/sirnik.jpg'
+      },
+      {
+        name: 'Slivník',
+        coordinates: [48.598, 21.5583],
+        image: 'TV/slivnik.jpg'
+      },
+      {
+        name: 'Slovenské Nové Mesto',
+        coordinates: [48.402, 21.6705],
+        image: 'TV/slovenskenovemesto.jpg'
+      },
+      {
+        name: 'Soľnička',
+        coordinates: [48.402, 21.6705],
+        image: 'TV/solnicka.jpg'
+      },
+      {
+        name: 'Somotor',
+        coordinates: [48.4025, 21.811],
+        image: 'TV/somotor.jpg'
+      },
+      {
+        name: 'Stanča',
+        coordinates: [48.5689, 21.6551],
+        image: 'TV/stanca.jpg'
+      },
+      {
+        name: 'Stankovce',
+        coordinates: [48.7637, 21.6585],
+        image: 'TV/stankovce.jpg'
+      },
+      {
+        name: 'Strážne',
+        coordinates: [48.3649, 21.8679],
+        image: 'TV/strazne.jpg'
+      },
+      {
+        name: 'Streda nad Bodrogom',
+        coordinates: [48.3759, 21.7588],
+        image: 'TV/stredanadbodrogom.jpg'
+      },
+      {
+        name: 'Svätá Mária',
+        coordinates: [48.4287, 21.8453],
+        image: 'TV/svatamaria.jpg'
+      },
+      {
+        name: 'Svätuše',
+        coordinates: [48.4297, 21.9218],
+        image: 'TV/svatuse.jpg'
+      },
+      {
+        name: 'Svinice',
+        coordinates: [48.4558, 21.881],
+        image: 'TV/svinice.jpg'
+      },
+      {
+        name: 'Trebišov',
+        coordinates: [48.6254, 21.7186],
+        image: 'TV/trebisov.jpg'
+      },
+      {
+        name: 'Trnávka',
+        coordinates: [48.705, 21.6173],
+        image: 'TV/trnavka.jpg'
+      },
+      {
+        name: 'Veľaty',
+        coordinates: [48.5216, 21.6599],
+        image: 'TV/velaty.jpg'
+      },
+      {
+        name: 'Veľká Tŕňa',
+        coordinates: [48.4656, 21.6795],
+        image: 'TV/velkatrna.jpg'
+      },
+      {
+        name: 'Veľké Ozorovce',
+        coordinates: [48.6624, 21.6094],
+        image: 'TV/velkeozorovce.jpg'
+      },
+      {
+        name: 'Veľké Trakany',
+        coordinates: [48.3898, 22.0918],
+        image: 'TV/velketrakany.jpg'
+      },
+      {
+        name: 'Veľký Horeš',
+        coordinates: [48.3811, 21.9088],
+        image: 'TV/velkyhores.jpg'
+      },
+      {
+        name: 'Veľký Kamenec',
+        coordinates: [48.3592, 21.8055],
+        image: 'TV/velkykamenec.jpg'
+      },
+      {
+        name: 'Viničky',
+        coordinates: [48.3973, 21.745],
+        image: 'TV/vinicky.jpg'
+      },
+      {
+        name: 'Višňov',
+        coordinates: [48.7471, 21.6692],
+        image: 'TV/visnov.jpg'
+      },
+      {
+        name: 'Vojčice',
+        coordinates: [48.6751, 21.7165],
+        image: 'TV/vojcice.jpg'
+      },
+      {
+        name: 'Vojka',
+        coordinates: [48.4588, 21.9157],
+        image: 'TV/vojka.jpg'
+      },
+      {
+        name: 'Zatín',
+        coordinates: [48.4757, 21.9036],
+        image: 'TV/zatin.jpg'
+      },
+      {
+        name: 'Zbehňov',
+        coordinates: [48.6873, 21.6286],
+        image: 'TV/zbehnov.jpg'
+      },
+      {
+        name: 'Zemplín',
+        coordinates: [48.4388, 21.8116],
+        image: 'TV/zemplin.jpg'
+      },
+      {
+        name: 'Zemplínska Nová Ves',
+        coordinates: [48.5757, 21.6702],
+        image: 'TV/zemplinskanovaves.jpg'
+      },
+      {
+        name: 'Zemplínska Teplica',
+        coordinates: [48.6449, 21.57179],
+        image: 'TV/zemplinskateplica.jpg'
+      },
+      {
+        name: 'Zemplínske Hradište',
+        coordinates: [48.5823, 21.7358],
+        image: 'TV/zemplinskehradiste.jpg'
+      },
+      {
+        name: 'Zemplínske Jastrabie',
+        coordinates: [48.4975, 21.7749],
+        image: 'TV/zemplinskejastrabie.jpg'
+      },
+      {
+        name: 'Zemplínsky Branč',
+        coordinates: [48.5421, 21.72],
+        image: 'TV/zemplinskybranc.jpg'
+      }
+    ];
+    
+    var MI = [
+      {
+        name: 'Bajany',
+        coordinates: [48.602, 22.1093],
+        image: 'MI/bajany.jpg'
+      },
+      {
+        name: 'Bánovce nad Ondavou',
+        coordinates: [48.681, 21.8134],
+        image: 'MI/banovcenadondavou.jpg'
+      },
+      {
+        name: 'Beša',
+        coordinates: [48.5337, 21.9524],
+        image: 'MI/besa.jpg'
+      },
+      {
+        name: 'Bracovce',
+        coordinates: [48.6454, 21.8398],
+        image: 'MI/bracovce.jpg'
+      },
+      {
+        name: 'Budince',
+        coordinates: [48.5432, 22.121],
+        image: 'MI/budince.jpg'
+      },
+      {
+        name: 'Budkovce',
+        coordinates: [48.6325, 21.9277],
+        image: 'MI/budkovce.jpg'
+      },
+      {
+        name: 'Čečehov',
+        coordinates: [48.7231, 21.9905],
+        image: 'MI/cecehov.jpg'
+      },
+      {
+        name: 'Čičarovce',
+        coordinates: [48.5389, 22.0224],
+        image: 'MI/cicarovce.jpg'
+      },
+      {
+        name: 'Čierne Pole',
+        coordinates: [48.5764, 22.0767],
+        image: 'MI/ciernepole.jpg'
+      },
+      {
+        name: 'Drahňov',
+        coordinates: [48.59, 21.9689],
+        image: 'MI/drahnov.jpg'
+      },
+      {
+        name: 'Dúbravka',
+        coordinates: [48.6359, 21.8903],
+        image: 'MI/dubravka.jpg'
+      },
+      {
+        name: 'Falkušovce',
+        coordinates: [48.6256, 21.8415],
+        image: 'MI/falkusovce.jpg'
+      },
+      {
+        name: 'Hatalov',
+        coordinates: [48.6576, 21.8865],
+        image: 'MI/hatalov.jpg'
+      },
+      {
+        name: 'Hažín',
+        coordinates: [48.7503, 22.0173],
+        image: 'MI/hazin.jpg'
+      },
+      {
+        name: 'Hnojné',
+        coordinates: [48.7747, 22.0698],
+        image: 'MI/hnojne.jpg'
+      },
+      {
+        name: 'Horovce',
+        coordinates: [48.7037, 21.7694],
+        image: 'MI/horovce.jpg'
+      },
+      {
+        name: 'Iňačovce',
+        coordinates: [48.6964, 22.0324],
+        image: 'MI/inacovce.jpg'
+      },
+      {
+        name: 'Ižkovce',
+        coordinates: [48.5557, 21.9551],
+        image: 'MI/izkovce.jpg'
+      },
+      {
+        name: 'Jastrabie pri Michalovciach',
+        coordinates: [48.7114, 22.0321],
+        image: 'MI/jastrabieprimichalovciach.jpg'
+      },
+      {
+        name: 'Jovsa',
+        coordinates: [48.8177, 22.0952],
+        image: 'MI/jovsa.jpg'
+      },
+      {
+        name: 'Kačanov',
+        coordinates: [48.6111, 21.8477],
+        image: 'MI/kacanov.jpg'
+      },
+      {
+        name: 'Kaluža',
+        coordinates: [48.8062, 22.0008],
+        image: 'MI/kaluza.jpg'
+      },
+      {
+        name: 'Kapušianske Kľačany',
+        coordinates: [48.5284, 22.1079],
+        image: 'MI/kapusianskeklacany.jpg'
+      },
+      {
+        name: 'Klokočov',
+        coordinates: [48.8125, 22.0293],
+        image: 'MI/klokocov.jpg'
+      },
+      {
+        name: 'Krásnovce',
+        coordinates: [48.7193, 21.883],
+        image: 'MI/krasnovce.jpg'
+      },
+      {
+        name: 'Krišovská Liesková',
+        coordinates: [48.583, 22.0272],
+        image: 'MI/krisovskalieskova.jpg'
+      },
+      {
+        name: 'Kusín',
+        coordinates: [48.8164, 22.0647],
+        image: 'MI/kusin.jpg'
+      },
+      {
+        name: 'Lastomír',
+        coordinates: [48.7023, 21.9253],
+        image: 'MI/lastomir.jpg'
+      },
+      {
+        name: 'Laškovce',
+        coordinates: [48.6987, 21.8504],
+        image: 'MI/laskovce.jpg'
+      },
+      {
+        name: 'Lesné',
+        coordinates: [48.7974, 21.8158],
+        image: 'MI/lesne.jpg'
+      },
+      {
+        name: 'Ložín',
+        coordinates: [48.6604, 21.8374],
+        image: 'MI/lozin.jpg'
+      },
+      {
+        name: 'Lúčky',
+        coordinates: [48.7661, 22.0389],
+        image: 'MI/lucky.jpg'
+      },
+      {
+        name: 'Malčice',
+        coordinates: [48.5771, 21.8518],
+        image: 'MI/malcice.jpg'
+      },
+      {
+        name: 'Malé Raškovce',
+        coordinates: [48.5782, 21.9205],
+        image: 'MI/maleraskovce.jpg'
+      },
+      {
+        name: 'Markovce',
+        coordinates: [48.59, 21.8446],
+        image: 'MI/markovce.jpg'
+      },
+      {
+        name: 'Maťovské Vojkovce',
+        coordinates: [48.5652, 22.1423],
+        image: 'MI/matovskevojkovce.jpg'
+      },
+      {
+        name: 'Michalovce',
+        coordinates: [48.7535, 21.915],
+        image: 'MI/michalovce.jpg'
+      },
+      {
+        name: 'Moravany',
+        coordinates: [48.7394, 21.7855],
+        image: 'MI/moravany.jpg'
+      },
+      {
+        name: 'Nacina Ves',
+        coordinates: [48.8186, 21.8546],
+        image: 'MI/nacinaves.jpg'
+      },
+      {
+        name: 'Oborín',
+        coordinates: [48.5407, 21.8868],
+        image: 'MI/oborin.jpg'
+      },
+      {
+        name: 'Oreské',
+        coordinates: [48.8543, 21.9047],
+        image: 'MI/oreske.jpg'
+      },
+      {
+        name: 'Palín',
+        coordinates: [48.6563, 21.9864],
+        image: 'MI/palin.jpg'
+      },
+      {
+        name: 'Pavlovce nad Uhom',
+        coordinates: [48.6125, 22.0654],
+        image: 'MI/pavlovcenaduhom.jpg'
+      },
+      {
+        name: 'Petrikovce',
+        coordinates: [48.5446, 21.858],
+        image: 'MI/petrikovce.jpg'
+      },
+      {
+        name: 'Petrovce nad Laborcom',
+        coordinates: [48.7928, 21.8758],
+        image: 'MI/petrovcenadlaborcom.jpg'
+      },
+      {
+        name: 'Poruba pod Vihorlatom',
+        coordinates: [48.8236, 22.1378],
+        image: 'MI/porubapodvihorlatom.jpg'
+      },
+      {
+        name: 'Pozdišovce',
+        coordinates: [48.7234, 21.8542],
+        image: 'MI/pozdisovce.jpg'
+      },
+      {
+        name: 'Ptrukša',
+        coordinates: [48.4852, 22.1399],
+        image: 'MI/ptruksa.jpg'
+      },
+      {
+        name: 'Pusté Čemerné',
+        coordinates: [48.8399, 21.8182],
+        image: 'MI/pustecemerne.jpg'
+      },
+      {
+        name: 'Rakovec nad Ondavou',
+        coordinates: [48.7675, 21.7838],
+        image: 'MI/rakovecnadondavou.jpg'
+      },
+      {
+        name: 'Ruská',
+        coordinates: [48.5262, 22.1423],
+        image: 'MI/ruska.jpg'
+      },
+      {
+        name: 'Senné',
+        coordinates: [48.6638, 22.0235],
+        image: 'MI/senne.jpg'
+      },
+      {
+        name: 'Slavkovce',
+        coordinates: [48.6005, 21.9225],
+        image: 'MI/slavkovce.jpg'
+      },
+      {
+        name: 'Sliepkovce',
+        coordinates: [48.6717, 21.9469],
+        image: 'MI/sliepkovce.jpg'
+      },
+      {
+        name: 'Staré',
+        coordinates: [48.8588, 21.8765],
+        image: 'MI/stare.jpg'
+      },
+      {
+        name: 'Strážske',
+        coordinates: [48.8722, 21.8381],
+        image: 'MI/strazske.jpg'
+      },
+      {
+        name: 'Stretava',
+        coordinates: [48.644, 22.0039],
+        image: 'MI/stretava.jpg'
+      },
+      {
+        name: 'Stretavka',
+        coordinates: [48.6209, 21.9891],
+        image: 'MI/stretavka.jpg'
+      },
+      {
+        name: 'Suché',
+        coordinates: [48.765, 21.837],
+        image: 'MI/suche.jpg'
+      },
+      {
+        name: 'Šamudovce',
+        coordinates: [48.7064, 21.8851],
+        image: 'MI/samudovce.jpg'
+      },
+      {
+        name: 'Trhovište',
+        coordinates: [48.6964, 21.8068],
+        image: 'MI/trhoviste.jpg'
+      },
+      {
+        name: 'Trnava pri Laborci',
+        coordinates: [48.8143, 21.9342],
+        image: 'MI/trnavaprilaborci.jpg'
+      },
+      {
+        name: 'Tušice',
+        coordinates: [48.7238, 21.7492],
+        image: 'MI/tusice.jpg'
+      },
+      {
+        name: 'Tušická Nová Ves',
+        coordinates: [48.7148, 21.7546],
+        image: 'MI/tusickanovaves.jpg'
+      },
+      {
+        name: 'Veľké Kapušany',
+        coordinates: [48.5509, 22.0753],
+        image: 'MI/velkekapusany.jpg'
+      },
+      {
+        name: 'Veľké Raškovce',
+        coordinates: [48.5555, 21.9112],
+        image: 'MI/velkeraskovce.jpg'
+      },
+      {
+        name: 'Veľké Slemence',
+        coordinates: [48.5077, 22.1433],
+        image: 'MI/velkeslemence.jpg'
+      },
+      {
+        name: 'Vinné',
+        coordinates: [48.8073, 21.9672],
+        image: 'MI/vinne.jpg'
+      },
+      {
+        name: 'Vojany',
+        coordinates: [48.5689, 21.9898],
+        image: 'MI/vojany.jpg'
+      },
+      {
+        name: 'Voľa',
+        coordinates: [48.8435, 21.8525],
+        image: 'MI/vola.jpg'
+      },
+      {
+        name: 'Vrbnica',
+        coordinates: [48.6783, 21.8858],
+        image: 'MI/vrbnica.jpg'
+      },
+      {
+        name: 'Vysoká nad Uhom',
+        coordinates: [48.6261, 22.0918],
+        image: 'MI/vysokanaduhom.jpg'
+      },
+      {
+        name: 'Zalužice',
+        coordinates: [48.7587, 21.9864],
+        image: 'MI/zaluzice.jpg'
+      },
+      {
+        name: 'Závadka',
+        coordinates: [48.765, 22.063],
+        image: 'MI/zavadka.jpg'
+      },
+      {
+        name: 'Zbudza',
+        coordinates: [48.8139, 21.893],
+        image: 'MI/zbudza.jpg'
+      },
+      {
+        name: 'Zemplínska Široká',
+        coordinates: [48.6923, 21.9781],
+        image: 'MI/zemplinskasiroka.jpg'
+      },
+      {
+        name: 'Zemplínske Kopčany',
+        coordinates: [48.5873, 21.9201],
+        image: 'MI/zemplinskekopcany.jpg'
+      },
+      {
+        name: 'Žbince',
+        coordinates: [48.6683, 21.8834],
+        image: 'MI/zbince.jpg'
+      }
+    ];
+
+TV.forEach(function(village) {
+  var marker = L.marker(village.coordinates, {
+    icon: L.icon({
+      iconUrl: 'a_marker/red.png', 
+      iconSize: [32, 32], 
+      iconAnchor: [16, 32] 
+    })
+  }).addTo(map);
+  marker.bindPopup('<h3>' + village.name + '</h3><img src="' + village.image + '" alt="' + village.name + '">');
+});
+
+MI.forEach(function(village) {
+  var marker = L.marker(village.coordinates, {
+    icon: L.icon({
+      iconUrl: 'a_marker/blue.png', 
+      iconSize: [32, 32], 
+      iconAnchor: [16, 32] 
+    })
+  }).addTo(map);
+  marker.bindPopup('<h3>' + village.name + '</h3><img src="' + village.image + '" alt="' + village.name + '">');
+});
+
+  </script>
+</body>
+</html>
